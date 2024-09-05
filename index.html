@@ -1,1 +1,1091 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="HUMOS: Human Motion Model Conditioned on Body Shape"
+    />
+    <meta
+      name="keywords"
+      content="HUMOS, Human Motion, Body Shape, Motion Modelling, 3D Humans"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      HUMOS: Human Motion Model Conditioned on Body Shape
+    </title>
+
+    <link
+      href="website/skin/custom/fonts.googleapis.com_css_family=Google+Sans_Noto+Sans_Castoro.css"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./website/static/css/bulma.min.css" />
+    <link rel="stylesheet" href="./website/static/css/bulma-carousel.min.css" />
+    <link rel="stylesheet" href="./website/static/css/bulma-slider.min.css" />
+    <link rel="stylesheet" href="./website/static/css/fontawesome.all.min.css" />
+    <link
+      rel="stylesheet"
+      href="website/skin/custom/cdn.jsdelivr.net_gh_jpswalsh_academicons@1_css_academicons.min.css"
+    />
+    <link rel="stylesheet" href="./website/static/css/index.css" />
+
+    <style>
+      .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
+      }
+      .render_wrapper {
+        position: relative;
+        height: 300px;
+      }
+      .render_wrapper_relative {
+        position: relative;
+        max-height: 300px;
+        height: auto;
+        width: auto;
+      }
+      .render_div {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      .nested-columns {
+        margin-bottom: 0 !important;
+      }
+
+      .outer-div {
+        display: grid;
+        place-items: center; /* Vertically and horizontally align content */
+        height: 300px;
+        width: auto;
+      }
+
+      .desc_div {
+        position: relative;
+        padding-left: 10%;
+        display: none;
+      }
+    </style>
+
+    <script src="website/skin/custom/ajax.googleapis.com_ajax_libs_jquery_3.5.1_jquery.min.js"></script>
+    <script src="./website/static/js/bulma-carousel.min.js"></script>
+    <script src="./website/static/js/bulma-slider.min.js"></script>
+    <script src="./website/static/js/index.js"></script>
+  </head>
+
+  <body>
+    <section class="hero">
+      <div class="hero-body">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered">
+            <div class="column has-text-centered">
+              <h1 class="title is-1 publication-title">
+                <span style="color: #E85C0D">HUMOS</span>:
+                <span style="color: #E85C0D">HU</span>man
+                <span style="color: #E85C0D">MO</span>tion Model Conditioned on Body
+                <span style="color: #E85C0D">S</span>hape
+              </h1>
+              <h1 class="is-size-3">
+                <strong style="color: #C7253E">ECCV 2024</strong>
+              </h1>
+              <div class="is-size-5 publication-authors">
+                <span class="author-block">
+                  <a href="https://sha2nkt.github.io/">Shashank Tripathi</a><sup>12</sup>,
+                  </span>
+                <span class="author-block">
+                  <a href="https://otaheri.github.io/">Omid Taheri</a><sup>1</sup>,
+                  </span>
+                <span class="author-block">
+                  <a href="https://christophlassner.de/">Christoph Lassner</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://ps.is.mpg.de/person/black">Michael Black</a><sup>1</sup>,
+                </span>
+                <br>
+                <span class="author-block">
+                  <a href="https://theorangeduck.com/">Daniel Holden</a><sup>2</sup>,
+                </span>
+                <span class="author-block">
+                  <a href="https://carstenstoll.github.io/">Carsten Stoll</a><sup>2</sup>
+                </span>
+              </div>
+
+              <div class="is-size-5 publication-authors">
+                <span class="author-block"><sup>1</sup>Max Planck Institute for Intelligent Systems,</span>
+                <span class="author-block"><sup>2</sup>Epic Games</span>
+              </div>
+
+              <div class="column has-text-centered">
+                <div class="publication-links">
+                  <!-- PDF Link. -->
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                    > 
+                      <span class="icon"> 
+                        <img src="website/skin/custom/arxiv.svg" width="15" />
+                      </span> &nbsp;&nbsp;arXiv
+                    </a> 
+                  </span>
+
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                    > 
+                      <span class="icon"> 
+                        <img src="website/skin/custom/pdf.svg" width="15" />
+                      </span> &nbsp;&nbsp;Paper
+                    </a> 
+                  </span>
+
+                  <!-- Poster Link. -->
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                    > 
+                      <span class="icon"> 
+                        <img src="website/skin/custom/poster.svg" width="15" />
+                      </span> &nbsp;&nbsp;Poster (Coming Soon)
+                    </a> 
+                  </span>
+
+                  <!-- Video Link. -->
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      href=""
+                      target="_blank"
+                      rel="noopener"
+                    > 
+                      <span class="icon"> 
+                        <img src="website/skin/custom/video.svg" width="15" />
+                      </span> &nbsp;&nbsp;Video
+                    </a> 
+                  </span>
+
+                  <!-- Github Link. -->
+                  <span class="link-block">
+                    <a
+                      class="external-link button is-normal is-rounded is-dark"
+                      href="https://github.com/CarstenEpic/humos"
+                      target="_blank"
+                      rel="noopener"
+                    > 
+                      <span class="icon"> 
+                        <img src="website/skin/custom/github.svg" width="15" />
+                      </span> &nbsp;&nbsp;Code (Coming Soon)
+                    </a> 
+                  </span>
+
+<!--                  &lt;!&ndash; Database/Login Link &ndash;&gt;-->
+<!--                  <span class="link-block"> -->
+<!--                    <a -->
+<!--                      class="external-link button is-normal is-rounded is-dark" -->
+<!--                      href="download.php" -->
+<!--                      target="_blank" -->
+<!--                      rel="noopener"-->
+<!--                    > -->
+<!--                      <span class="icon"> -->
+<!--                        <img src="website/skin/custom/database.svg" width="15" /> -->
+<!--                      </span> &nbsp;&nbsp;Dataset-->
+<!--                    </a> -->
+<!--                  </span>-->
+
+                  <br />
+
+<!--                  &lt;!&ndash; Colab &ndash;&gt;-->
+<!--                  <span class="link-block"> -->
+<!--                    <a -->
+<!--                      class="external-link button is-normal is-rounded" -->
+<!--                      href="" -->
+<!--                      style="background: rgb(255, 255, 255)"-->
+<!--                      target="_blank" -->
+<!--                      rel="noopener"-->
+<!--                    > -->
+<!--                      <span class="icon"> -->
+<!--                        <img src="website/skin/custom/colab.svg" width="30" /> -->
+<!--                      </span> &nbsp;&nbsp;Google Colab-->
+<!--                    </a> -->
+<!--                  </span>-->
+
+<!--                  &lt;!&ndash; HuggingFace &ndash;&gt;-->
+<!--                  <span class="link-block"> -->
+<!--                    <a -->
+<!--                      class="external-link button is-normal is-rounded" -->
+<!--                      href="" -->
+<!--                      style="background: rgb(255, 255, 255)"-->
+<!--                      target="_blank" -->
+<!--                      rel="noopener"-->
+<!--                    > -->
+<!--                      <span class="icon"> -->
+<!--                        <img src="website/skin/custom/huggingface.svg" width="30" /> -->
+<!--                      </span> &nbsp;&nbsp; HuggingFace-->
+<!--                    </a> -->
+<!--                  </span>-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hero teaser">
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <img src="./website/static/teaser/teaser.png" height="150%" />
+          <h2 class="subtitle has-text-centered" style="padding-top: 10px">
+            <p align="justify">
+              <b>Generating 3D human motion conditioned on body shape.</b>
+                People with different body shapes perform the same motion differently. Our method, <span
+                    style="color: #E85C0D"><b>HUMOS</b></span>, generates <span
+                    style="color: #F266AB">natural</span>, <span
+                    style="color: #A459D1">physically plausible</span>, and <span
+                    style="color: #337357">dynamically stable</span> human motions based on body shape.
+                <span style="color: #E85C0D"><b>HUMOS</b></span> introduces a novel identity-preserving cycle
+                consistency loss and uses differentiable dynamic stability and physics terms to learn an
+                identity-conditioned manifold of human motions. The illustration shows the same walking motion with a
+                skip-step in the middle, generated by <span style="color: #E85C0D"><b>HUMOS</b></span> for five different identities. To demonstrate
+                shape-conditioning, we visualize the same motion, changing the identity after every 30 frames.
+            </p>
+          </h2>
+        </div>
+      </div>
+    </section>
+
+    <section class="section hero is-light">
+        <div class="container is-max-desktop">
+            <!-- Abstract. -->
+            <div class="columns is-centered has-text-centered">
+                <div class="column is-four-fifths">
+                    <div class="item">
+                        <iframe width="720" height="405" src="https://www.youtube.com/embed/yLXX7TxBA4o?si=i210BBliGYCM8ccg"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowfullscreen></iframe>
+                        </p>
+                    </div>
+                    <p style="margin-bottom: 30px">
+                    <h2 class="title is-3">Abstract</h2>
+                    <div class="content has-text-justified">
+                        <p>
+                            Generating realistic human motion is essential for many computer vision and graphics
+                            applications. The wide variety of human body shapes and sizes greatly impacts how people
+                            move. However, most existing motion models ignore these differences, relying on a
+                            standardized, average body. This leads to uniform motion across different body types, where
+                            movements don't match their physical characteristics, limiting diversity. To solve this, we
+                            introduce a new approach to develop a generative motion model based on body shape. We show
+                            that it's possible to train this model using unpaired data by applying cycle consistency,
+                            intuitive physics, and stability constraints, which capture the relationship between
+                            identity and movement. The resulting model generates diverse, physically plausible, and
+                            dynamically stable human motions that are both quantitatively and qualitatively more
+                            realistic than current state-of-the-art methods.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <!--/ Abstract. -->
+        </div>
+    </section>
+
+<!--    &lt;!&ndash; HOT Visuals &ndash;&gt;-->
+
+<!--    <section class="hero is-light is-small">-->
+<!--      <div class="hero-body">-->
+<!--        <h2 class="title is-3" style="text-align: center;">DECO Results</h2>-->
+<!--        <div class="container">-->
+<!--          <div id="results-carousel" class="carousel results-carousel">-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/hot/hake_train2015_HICO_train2015_00012216.jpg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="hot1" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/hot/hake_train2015_HICO_train2015_00013043.jpg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="hot2" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/hot/vcoco_000000537864.jpg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="hot3" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/hot/vcoco_000000576589.jpg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="hot4" class="render_div"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div style="text-align: center">-->
+<!--            DECO on images from the <b>HOT</b> dataset-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Internet Images &ndash;&gt;-->
+
+<!--    <section class="hero is-light is-small">-->
+<!--      <div class="hero-body">-->
+<!--        <div class="container">-->
+<!--          <div id="results-carousel" class="carousel results-carousel">-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/internet_yoga/pexels-photo-207569.webp"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="nat1" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/internet_yoga/pexels-photo-3622517.webp"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="nat2" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/internet_yoga/pexels-photo-15732209.jpeg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="nat3" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div class="item item-steve render_wrapper_relative">-->
+<!--                <img-->
+<!--                  src="./website/examples/internet_yoga/213.jpg"-->
+<!--                />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="nat4" class="render_div"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div style="text-align: center">-->
+<!--            DECO on <b>Internet images</b>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="section">-->
+<!--      <div class="container is-max-desktop">-->
+<!--        &lt;!&ndash; Overview. &ndash;&gt;-->
+<!--        <div-->
+<!--          class="columns is-centered has-text-centered"-->
+<!--          style="margin-top: 15px"-->
+<!--        >-->
+<!--          <div class="column is-full-width">-->
+<!--            <h2 class="title is-3">Method Overview</h2>-->
+<!--            <img src="./website/static/teaser/overview.png" />-->
+<!--            <div class="content has-text-justified" style="padding-top: 15px">-->
+<!--              <b>DECO</b> reasons about body parts, human-object proximity, and the surrounding scene context.-->
+<!--              To this end, it uses three branches, i.e., a <b><span style="color: #9cc3e6">scene-context</span></b>, a <b><span style="color: #f2b083">part-context</span></b>, and a <b><span style="color: #7030a1">per-vertex contact-classification branch</span></b>.-->
+<!--              A cross attention guides the features to “attend” on (and around) body parts and scene elements that are relevant for contact.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="section">-->
+<!--      <div class="container is-max-desktop">-->
+<!--        &lt;!&ndash; Abstract. &ndash;&gt;-->
+<!--        <div class="columns is-centered has-text-centered">-->
+<!--          <div class="column is-four-fifths">-->
+<!--            <h2 class="title is-3">Abstract</h2>-->
+<!--            <div class="content has-text-justified">-->
+<!--              <p margin="0">-->
+<!--                <p>Understanding how humans use physical contact to interact with the world is a key step toward human-centric artificial intelligence.-->
+<!--                <span style="color: lightcoral">While inferring 3D contact is crucial for modeling realistic and physically-plausible human-object interactions, existing methods either focus on 2D, consider body joints rather than the surface, use coarse 3D body regions, or do not generalize to in-the-wild images.</span></p>-->
+<!--                <p><span style="color: forestgreen">In contrast, we focus on inferring dense, 3D contact between the full body surface and objects in arbitrary images. To achieve this, we first collect <b>DAMON</b>, a new dataset containing dense vertex-level contact annotations paired with RGB images containing complex human-object and human-scene contact. Second, we train <b>DECO</b> , a novel 3D contact detector which uses both body-part-driven and scene-context-driven attention to estimate vertex-level contact on the SMPL body. DECO builds on the insight that human observers recognize contact by reasoning about the contacting body parts, their proximity to scene objects, and the surrounding scene context.</span></p>-->
+<!--                <p>We perform extensive evaluations for our detector on DAMON as well as on the RICH and BEHAVE datasets. We significantly outperform existing SOTA methods across all benchmarks. We also show qualitatively that DECO generalizes well to diverse and challenging real-world human interactions in natural images.</p>-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--        <div class="columns is-centered has-text-centered">-->
+<!--          <div class="column is-four-fifths">-->
+<!--            <h2 class="title is-3">Intro Video</h2>-->
+<!--            <div class="publication-video">-->
+<!--              <iframe-->
+<!--                width="560"-->
+<!--                height="315"-->
+<!--                src="https://www.youtube.com/embed/o7MLobqAFTQ?si=SYX_N4r0x0J_xxfe"-->
+<!--                title="YouTube video player"-->
+<!--                frameborder="0"-->
+<!--                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"-->
+<!--                allowfullscreen>-->
+<!--              </iframe>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash;/ Paper video. &ndash;&gt;-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <section class="section">-->
+<!--      <div class="container is-max-desktop">-->
+<!--        &lt;!&ndash; DAMON Dataset &ndash;&gt;-->
+<!--        <div class="columns is-centered has-text-centered">-->
+<!--          <div class="column is-four-fifths">-->
+<!--            <h2 class="title is-3">DAMON Dataset</h2>-->
+<!--            <div class="content has-text-justified">-->
+<!--              <p margin="0">-->
+<!--                <span style="color: #b300b3"><b>DAMON</b></span>-->
+<!--                (<span style="color: #b300b3">D</span>ense-->
+<!--                <span style="color: #b300b3">A</span>nnotation of 3D-->
+<!--                Hu<span style="color: #b300b3">MA</span>n-->
+<!--                <span style="color: #b300b3">O</span>bject Contact in-->
+<!--                <span style="color: #b300b3">N</span>atural Images)-->
+<!--                is a collection of <span style="color: forestgreen"><b>vertex-level 3D contact</b> labels on SMPL paired with color images of people in unconstrained environments with a wide diversity of human-scene and human-object interactions</span>.-->
+<!--                The sourced images contain valid human-contact images from existing HOI datasets by removing <span style="color: lightcoral">indirect human-object interactions, heavily cropped humans, motion blur, distortion or extreme lighting conditions</span>.-->
+<!--              </p>-->
+<!--              <p margin="0">-->
+<!--                A total of <b>5522 images</b> are annotated - contact vertices are painted and assigned an appropriate label out of 84 object and 24 body-part labels.-->
+<!--                The contact region for each object class has been color-coded for better visual representation.-->
+<!--                Specifically, two types of contact has been focused on:-->
+<!--                (1) <b>scene-supported contact</b>: humans supported by scene objects, and-->
+<!--                (2) <b>human-supported contact</b>: objects supported by a human.-->
+<!--              </p>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    &lt;!&ndash; Dataset Images &ndash;&gt;-->
+
+<!--    <section class="hero is-light is-small">-->
+<!--      <div class="hero-body">-->
+<!--        <div class="container">-->
+<!--          <div id="results-carousel" class="carousel results-carousel">-->
+<!--            <div class="outer-div">-->
+<!--              <div id="damon1_img" class="item item-steve render_wrapper_relative">-->
+<!--                <img src="./website/examples/damon/hake_train2015_HICO_train2015_00000082.jpg" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon1" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon1_support" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div id="damon2_img" class="item item-steve render_wrapper_relative">-->
+<!--                <img src="./website/examples/damon/vcoco_000000350231.jpg" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon2" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon2_support" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div id="damon3_img" class="item item-steve render_wrapper_relative">-->
+<!--                <img src="./website/examples/damon/vcoco_000000420649.jpg" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon3" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon3_support" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="outer-div">-->
+<!--              <div id="damon4_img" class="item item-steve render_wrapper_relative">-->
+<!--                <img src="./website/examples/damon/vcoco_000000577928.jpg" />-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon4" class="render_div"></div>-->
+<!--            </div>-->
+<!--            <div class="item item-steve render_wrapper">-->
+<!--              <div id="damon4_support" class="render_div"></div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div style="text-align: center">-->
+<!--            Images from the <b>DAMON</b> Dataset (object-contact and supporting-contact respectively).-->
+<!--            <p margin="0">-->
+<!--              <i><mark>-->
+<!--                Please click on the RGB images for a list of objects contacted with.-->
+<!--                Font colors indicate the color of contact annotation on the displayed mesh. <br>-->
+<!--                Supporting contact is indicated in <b><span style="color: purple;">purple</span></b> in the second mesh.-->
+<!--              </mark></i>-->
+<!--            </p>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div id="damon1_desc" class="desc_div">-->
+<!--          <br>-->
+<!--          <h2 class="title is-5">Object in image:</h2>-->
+<!--          <b>-->
+<!--            <span style="color: #e80c31">Backpack</span>-->
+<!--          </b>-->
+<!--        </div>-->
+<!--        <div id="damon2_desc" class="desc_div">-->
+<!--          <br>-->
+<!--          <h2 class="title is-5">Object in image:</h2>-->
+<!--          <b>-->
+<!--            <span style="color: #bf1f39">Bowl</span> <br>-->
+<!--            <span style="color: #e7b947">Book</span> <br>-->
+<!--            <span style="color: #61f815">Cell Phone</span> <br>-->
+<!--            <span style="color: #0af887">Chair</span> <br>-->
+<!--            <span style="color: #2b84ca">Dining Table</span>-->
+<!--          </b>-->
+<!--        </div>-->
+<!--        <div id="damon3_desc" class="desc_div">-->
+<!--          <br>-->
+<!--          <h2 class="title is-5">Object in image:</h2>-->
+<!--          <b>-->
+<!--            <span style="color: #e60d2c">Laptop</span> <br>-->
+<!--            <span style="color: #f7f817">Cell Phone</span> <br>-->
+<!--            <span style="color: #13f418">Bottle</span> <br>-->
+<!--            <span style="color: #15e0f6">Bed</span>-->
+<!--          </b>-->
+<!--        </div>-->
+<!--        <div id="damon4_desc" class="desc_div">-->
+<!--          <br>-->
+<!--          <h2 class="title is-5">Object in image:</h2>-->
+<!--          <b>-->
+<!--            <span style="color: #e80c31">Backpack</span> <br>-->
+<!--            <span style="color: #f29b18">Book</span> <br>-->
+<!--            <span style="color: #aaeb49">Cup</span> <br>-->
+<!--            <span style="color: #17f036">Cell Phone</span> <br>-->
+<!--            <span style="color: #2bf1e0">Chair</span> <br>-->
+<!--            <span style="color: #0d4aec">Dining Table</span>-->
+<!--          </b>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section>-->
+
+<!--    <script>-->
+<!--      $(document).ready(function(){-->
+<!--        var damon1_disp, damon2_disp, damon3_disp, damon4_disp;-->
+
+<!--        $("#damon1_img").click(function(){-->
+<!--            damon2_disp = $('#damon2_desc').css('display');-->
+<!--            damon3_disp = $('#damon3_desc').css('display');-->
+<!--            damon4_disp = $('#damon4_desc').css('display');-->
+
+<!--            if (damon2_disp != 'none') {-->
+<!--              $("#damon2_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon3_disp != 'none') {-->
+<!--              $("#damon3_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon4_disp != 'none') {-->
+<!--              $("#damon4_desc").slideToggle("fast");-->
+<!--            }-->
+
+<!--           $( "#damon1_desc" ).slideToggle( "slow", function() {-->
+<!--           });-->
+
+<!--       });-->
+
+<!--        $("#damon2_img").click(function(){-->
+<!--            damon1_disp = $('#damon1_desc').css('display');-->
+<!--            damon3_disp = $('#damon3_desc').css('display');-->
+<!--            damon4_disp = $('#damon4_desc').css('display');-->
+
+<!--            if (damon1_disp != 'none') {-->
+<!--              $("#damon1_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon3_disp != 'none') {-->
+<!--              $("#damon3_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon4_disp != 'none') {-->
+<!--              $("#damon4_desc").slideToggle("fast");-->
+<!--            }-->
+
+<!--          $( "#damon2_desc" ).slideToggle( "slow", function() {-->
+<!--          });-->
+
+<!--        });-->
+
+<!--        $("#damon3_img").click(function(){-->
+<!--            damon1_disp = $('#damon1_desc').css('display');-->
+<!--            damon2_disp = $('#damon2_desc').css('display');-->
+<!--            damon4_disp = $('#damon4_desc').css('display');-->
+
+<!--            if (damon1_disp != 'none') {-->
+<!--              $("#damon1_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon2_disp != 'none') {-->
+<!--              $("#damon2_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon4_disp != 'none') {-->
+<!--              $("#damon4_desc").slideToggle("fast");-->
+<!--            }-->
+
+<!--          $( "#damon3_desc" ).slideToggle( "slow", function() {-->
+<!--          });-->
+
+<!--        });-->
+
+<!--        $("#damon4_img").click(function(){-->
+<!--            damon1_disp = $('#damon1_desc').css('display');-->
+<!--            damon2_disp = $('#damon2_desc').css('display');-->
+<!--            damon3_disp = $('#damon3_desc').css('display');-->
+
+<!--            if (damon1_disp != 'none') {-->
+<!--              $("#damon1_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon2_disp != 'none') {-->
+<!--              $("#damon2_desc").slideToggle("fast");-->
+<!--            }-->
+<!--            if (damon3_disp != 'none') {-->
+<!--              $("#damon3_desc").slideToggle("fast");-->
+<!--            }-->
+
+<!--          $( "#damon4_desc" ).slideToggle( "slow", function() {-->
+<!--          });-->
+
+<!--        });-->
+<!--      });-->
+<!--    </script>-->
+
+<!--    <section class="section">-->
+<!--      <div class="container is-max-desktop">-->
+<!--        &lt;!&ndash; Acknowledgments. &ndash;&gt;-->
+<!--        <div class="columns is-centered has-text-centered">-->
+<!--          <div class="column is-full-width">-->
+<!--            <h2 class="title is-3">Acknowledgments & Disclosure</h2>-->
+
+<!--            <div class="content has-text-justified">-->
+<!--              We sincerely thank <a href="https://ps.is.mpg.de/person/acseke">Alpar Cseke</a> for his contributions to DAMON data collection and PHOSA evaluations,-->
+<!--              <a href="https://saidwivedi.in/">Sai K. Dwivedi</a> for facilitating PROX downstream experiments,-->
+<!--              <a href="https://people.mpi-inf.mpg.de/~xxie/">Xianghui Xie</a> for his generous help with CHORE evaluations,-->
+<!--              <a href="https://is.mpg.de/person/lmueller2">Lea Muller</a> for her help in initiating the contact annotation tool,-->
+<!--              <a href="https://paulchhuang.wixsite.com/chhuang">Chun-Hao P. Huang</a> for RICH discussions and-->
+<!--              <a href="https://yixchen.github.io/">Yixin Chen</a> for details about the HOT paper.-->
+<!--              We are grateful to Mengqin Xue and-->
+<!--              <a href="https://www.researchgate.net/scientific-contributions/Zhenyu-Lou-2225490619">Zhenyu Lou</a> for their collaboration in BEHAVE evaluations,-->
+<!--              <a href="https://ps.is.mpg.de/person/jtesch">Joachim Tesch</a> and-->
+<!--              <a href="https://is.mpg.de/person/nathanasiou">Nikos Athanasiou</a> for insightful visualization advice, and-->
+<!--              <a href="https://ps.is.mpg.de/person/talexiadis">Tsvetelina Alexiadis</a> for valuable data collection guidance.-->
+<!--              Their invaluable contributions enriched this research significantly.-->
+<!--              We also thank <a href="https://is.mpg.de/person/bpellkofer">Benjamin Pellkofer</a> for help with the website and IT support.-->
+<!--              This work was funded by the International Max Planck Research School for Intelligent Systems (IMPRS-IS).-->
+<!--              <br /><br />-->
+<!--              MJB has received research gift funds from Adobe, Intel, Nvidia, Meta/Facebook, and Amazon.-->
+<!--              MJB has financial interests in Amazon, Datagen Technologies, and Meshcapade GmbH.-->
+<!--              While MJB is a consultant for Meshcapade, his research in this project was performed solely at, and funded solely by, the Max Planck Society.-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        &lt;!&ndash; Acknowledgments. &ndash;&gt;-->
+
+        <!-- Contact. -->
+        <div class="columns is-centered has-text-centered">
+          <div class="column is-full-width">
+            <h2 class="title is-3">
+              Contact
+            </h2>
+
+            <div class="content has-text-justified">
+              For technical questions, please contact
+              <a href="mailto: shashank.tripathi123@gmail.com"
+                >shashank.tripathi123@gmail.com</a
+              >
+              <br />
+
+              For commercial licensing, please contact
+              <a href="mailto: carsten.stoll@epicgames.com "
+                >carsten.stoll@epicgames.com</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="BibTeX">
+      <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre>
+<code>@inproceedings{tripathi2024humos,
+  title     = {{HUMOS}: Human Motion Model Conditioned on Body Shape},
+  author    = {Tripathi, Shashank and Taheri, Omid and Lassner, Christoph and Black, Michael J. and Holden, Daniel and Stoll, Carsten},
+  booktitle = {European Conference on Computer Vision ({ECCV})},
+  year      = {2024},
+}</code></pre>
+      </div>
+    </section>
+
+
+    <footer class="footer">
+      <div class="container">
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p style="text-align: center">
+                Source code mainly borrowed from
+                <a href="https://xiuyuliang.cn/">Yuliang Xiu</a>'s
+                <a href="https://xiuyuliang.cn/econ/">ECON website</a> and
+                <a href="https://nihalsid.github.io/"
+                  >Yawar Siddiqui</a
+                >'s' adoption for
+                <a href="https://nihalsid.github.io/texturify/">Texturify</a>.<br>
+                The code for this website can be found <a href="https://github.com/ac5113/deco_website_github">here</a>.
+              </p>
+              <p style="text-align: center">
+                For technical questions, please contact
+                <a href="mailto: deco@tue.mpg.de">DECO</a><br />
+                For commercial licensing, please contact
+                <a href="mailto: ps-licensing@tue.mpg.de">ps-licensing</a><br />
+                <small
+                  >© 2023 Max-Planck-Gesellschaft
+                  <small class="text-muted ml-1 mr-1">-</small>
+                  <a href="imprint.html">Imprint</a>
+                  <small class="text-muted ml-1 mr-1">-</small>
+                  <a href="privacy-policy.html">Privacy Policy</a>
+                  <small class="text-muted ml-1 mr-1">-</small>
+                  <a href="license.html">License</a>
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script
+      async
+      src="website/skin/custom/unpkg.com_es-module-shims@1.3.6_dist_es-module-shims.js"
+    ></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "./website/js/three.module.js"
+        }
+      }
+    </script>
+
+    <script type="module">
+      import * as THREE from "three";
+
+      import { PLYLoader } from "./website/js/PLYLoader.js";
+      import { OrbitControls } from "./website/js/OrbitControls.js";
+      let div_to_scene = {
+        hot1: {
+          color: null,
+        },
+        hot2: {
+          color: null,
+        },
+        hot3: {
+          color: null,
+        },
+        hot4: {
+          color: null,
+        },
+
+        nat1: {
+          color: null,
+        },
+        nat2: {
+          color: null,
+        },
+        nat3: {
+          color: null,
+        },
+        nat4: {
+          color: null,
+        },
+
+        damon1: {
+          color: null,
+        },
+        damon1_support: {
+          color: null,
+        },
+        damon2: {
+          color: null,
+        },
+        damon2_support: {
+          color: null,
+        },
+        damon3: {
+          color: null,
+        },
+        damon3_support: {
+          color: null,
+        },
+        damon4: {
+          color: null,
+        },
+        damon4_support: {
+          color: null,
+        }
+      };
+      let mouse_button_down = false;
+      let list_of_orbit_controls = [];
+
+      function setup_camera(div_name) {
+        let container = document.getElementById(div_name);
+        let width = container.parentElement.clientWidth;
+        let height = container.parentElement.clientHeight;
+        console.log(width, height);
+        let camera = new THREE.PerspectiveCamera(35, width / height, 0.1, 50);
+        let camera_init_position = new THREE.Vector3(0, 0, 2.2);
+        camera_init_position = camera_init_position.multiplyScalar(1.5);
+        camera.position.set(
+          camera_init_position.x,
+          camera_init_position.y,
+          camera_init_position.z
+        );
+        return camera;
+      }
+
+      function setup_render_divs(div_name, mesh_path) {
+        let camera = setup_camera(div_name);
+        let orbit_control = create_render_div(camera, div_name, mesh_path);
+        list_of_orbit_controls.push(orbit_control);
+      }
+
+      function create_render_div(camera, div_id, mesh_path) {
+        let container;
+        let renderer, controls;
+
+        init();
+        animate();
+
+        function init() {
+          container = document.getElementById(div_id);
+          let width = container.parentElement.clientWidth;
+          let height = container.parentElement.clientHeight;
+
+          div_to_scene[div_id]["color"] = new THREE.Scene();
+          div_to_scene[div_id]["color"].background = new THREE.Color( 0xffffff );
+
+          // PLY file
+
+          const loader = new PLYLoader();
+          loader.load(mesh_path, function (geometry) {
+              geometry.computeVertexNormals();
+              let material_color = new THREE.MeshPhongMaterial( {
+                color: 0xcce6ff,
+                vertexColors: THREE.VertexColors,
+                specular: 0x222222,
+                shininess: 10,
+              });
+
+              const mesh_color = new THREE.Mesh(geometry, material_color);
+              div_to_scene[div_id]["color"].add(mesh_color);
+            },
+            (xhr) => {
+              console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+
+          // lights
+
+          add_lights(div_to_scene[div_id]["color"]);
+
+          // renderer
+
+          renderer = new THREE.WebGLRenderer({ antialias: true });
+          renderer.setPixelRatio(window.devicePixelRatio);
+          renderer.setSize(width, height);
+          renderer.outputEncoding = THREE.sRGBEncoding;
+
+          container.appendChild(renderer.domElement);
+
+          controls = new OrbitControls(camera, renderer.domElement);
+          controls.enableDamping = false;
+          controls.autoRotate = true;
+
+          // resize
+
+          window.addEventListener("resize", onWindowResize);
+          controls.addEventListener("start", function () {
+            controls.autoRotate = false;
+          });
+        }
+        function onWindowResize() {
+          let width = container.clientWidth;
+          let height = container.clientHeight;
+          camera.aspect = width / height;
+          camera.updateProjectionMatrix();
+          renderer.setSize(width, height);
+        }
+        function animate() {
+          requestAnimationFrame(animate);
+          controls.update();
+          render();
+        }
+
+        function render() {
+          renderer.render( div_to_scene[div_id]["color"], camera );
+          controls.update();
+        }
+
+        return controls;
+      }
+
+      function add_lights(scene) {
+        scene.add(new THREE.HemisphereLight(0x443333, 0x111122, 0.05));
+        const spotLight = new THREE.SpotLight(0xffffff, 0.5);
+        spotLight.position.set(0.0, 0.5, 1);
+        const spotLight2 = new THREE.SpotLight(0xffffff, 0.25);
+        spotLight2.position.set(-2, 0.3, -0.2);
+        const spotLight3 = new THREE.SpotLight(0xffffff, 0.25);
+        spotLight3.position.set(2, -0.3, 0.2);
+        const spotLight4 = new THREE.SpotLight(0xffffff, 0.25);
+        spotLight4.position.set(0.0, 1, -2);
+        const spotLight5 = new THREE.SpotLight(0xffffff, 0.05);
+        spotLight5.position.set(0, -2.5, -1);
+        spotLight.position.multiplyScalar(10);
+        scene.add(spotLight);
+        scene.add(spotLight2);
+        scene.add(spotLight3);
+        scene.add(spotLight4);
+        scene.add(spotLight5);
+      }
+
+      document.addEventListener("keydown", logKey);
+
+      function logKey(evt) {
+        if (evt.keyCode === 82 && !mouse_button_down) {
+          reset_orbit_controls();
+        }
+      }
+
+      function reset_orbit_controls() {
+        list_of_orbit_controls.forEach((oc) => {
+          oc.reset();
+          oc.autoRotate = false;
+        });
+      }
+
+      document.body.onmousedown = function (evt) {
+        if (evt.button === 0) mouse_button_down = true;
+      };
+      document.body.onmouseup = function (evt) {
+        if (evt.button === 0) mouse_button_down = false;
+      };
+
+      window.onload = function () {
+        let slider = document.getElementsByClassName("slider")[0];
+        slider.removeAttribute("tabIndex");
+        setup_render_divs(
+          "hot1",
+          "./website/models/hot/deco_hake_train2015_HICO_train2015_00012216.ply"
+        );
+        setup_render_divs(
+          "hot2",
+          "./website/models/hot/deco_hake_train2015_HICO_train2015_00013043.ply"
+        );
+        setup_render_divs(
+          "hot3",
+          "./website/models/hot/deco_vcoco_000000537864.ply"
+        );
+        setup_render_divs(
+          "hot4",
+          "./website/models/hot/deco_vcoco_000000576589.ply"
+        );
+
+        setup_render_divs(
+          "nat1",
+          "./website/models/internet_yoga/pexels-photo-207569.ply"
+        );
+        setup_render_divs(
+          "nat2",
+          "./website/models/internet_yoga/pexels-photo-3622517.ply"
+        );
+        setup_render_divs(
+          "nat3",
+          "./website/models/internet_yoga/pexels-photo-15732209.ply"
+        );
+        setup_render_divs(
+          "nat4",
+          "./website/models/internet_yoga/213.ply"
+        );
+
+        setup_render_divs(
+          "damon1",
+          "./website/models/damon/hake_train2015_HICO_train2015_00000082.ply"
+        );
+        setup_render_divs(
+          "damon1_support",
+          "./website/models/damon/hake_train2015_HICO_train2015_00000082_support.ply"
+        );
+        setup_render_divs(
+          "damon2",
+          "./website/models/damon/vcoco_000000350231.ply"
+        );
+        setup_render_divs(
+          "damon2_support",
+          "./website/models/damon/vcoco_000000350231_support.ply"
+        );
+        setup_render_divs(
+          "damon3",
+          "./website/models/damon/vcoco_000000420649.ply"
+        );
+        setup_render_divs(
+          "damon3_support",
+          "./website/models/damon/vcoco_000000420649_support.ply"
+        );
+        setup_render_divs(
+          "damon4",
+          "./website/models/damon/vcoco_000000577928.ply"
+        );
+        setup_render_divs(
+          "damon4_support",
+          "./website/models/damon/vcoco_000000577928_support.ply"
+        );
+      };
+    </script>
+  </body>
+</html>
