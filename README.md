@@ -1,4 +1,4 @@
 # humos
 Humos paper repository
 
-[[Project Page](https://deco.is.tue.mpg.de)]
+[[Project Page](https://carstenepic.github.io/humos/)]
